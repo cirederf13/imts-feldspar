@@ -29,15 +29,14 @@ bash run/run_slow.sh            # fits of the three models on the slow rates (ne
 ```
 All scripts must be run from the repository root. The environment variables above are read at import time and are set in every `run/*.sh`.
 
-Figures
+Figures (run the first three from the repository root, the last from `paper_figs/tests_fwd_gpu`)
 
 ```
-cd paper_figs
-PYTHONPATH=.. python make_compare3_slow.py
-PYTHONPATH=.. python make_forward3_slow.py
-python make_synthetic_tests.py
-python make_maad_window_growth.py
-cd tests_fwd_gpu && python example_sens_med.py && python epica_sens_med.py && python elev_post_med.py && python osc_post.py
+PYTHONPATH=. python paper_figs/make_forward3_slow.py
+python paper_figs/make_compare3_slow.py
+python paper_figs/make_synthetic_tests.py
+python paper_figs/make_maad_window_growth.py
+cd paper_figs/tests_fwd_gpu && python example_sens_med.py && python epica_sens_med.py && python elev_post_med.py && python osc_post.py
 ```
 Outputs go to `paper_figs/out/` (not tracked).
 

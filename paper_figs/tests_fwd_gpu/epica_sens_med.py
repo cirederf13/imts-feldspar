@@ -39,10 +39,10 @@ for j, d in enumerate([3.0, 5.0, 10.0, 15.0]):
 plt.tight_layout(); plt.savefig("../out/t1_epica_histories.png", dpi=150)
 # summary comparing the three cases + proxy shapes
 fig, ax = plt.subplots(1, 4, figsize=(18, 4.2)); cols = ["#6baed6", "#d95f02", "#756bb1"]
-ax[0].plot(ZN["tmid"] / 1e3, ZN["c"], color=cols[0], lw=.8, label="NGRIP"); ax[0].plot(ZE["tmid"] / 1e3, ZE["c"], color=cols[1], lw=.8, label="EPICA"); ax[0].set_xlim(123, 0); ax[0].set_xlabel("age (ka)"); ax[0].set_ylabel("scaled coldness c(t)"); ax[0].legend(frameon=False, fontsize=8); ax[0].set_title("(a) proxy shapes")
+ax[0].plot(ZN["tmid"] / 1e3, ZN["c"], color=cols[0], lw=.8, label="NGRIP"); ax[0].plot(ZE["tmid"] / 1e3, ZE["c"], color=cols[1], lw=.8, label="EPICA"); ax[0].set_xlim(123, 0); ax[0].set_xlabel("age (ka)"); ax[0].set_ylabel("scaled coldness c(t)"); ax[0].legend(frameon=False, fontsize=8); ax[0].set_title("proxy shapes")
 for j, (k, o) in enumerate(cases.items()):
     ax[1].errorbar(np.array(DS) + 0.5 * (j - 1), [o[d]["m1"] for d in DS], yerr=[o[d]["s1"] for d in DS], fmt="o", color=cols[j], capsize=3, label=k)
     ax[2].plot(DS, [100 * o[d]["ex"] for d in DS], "o-", color=cols[j]); ax[3].plot(DS, [o[d]["s1"] for d in DS], "o-", color=cols[j])
-ax[1].plot([0, 15], [0, 15], "k--", lw=.8); ax[1].set_xlabel("true cooling (°C)"); ax[1].set_ylabel("recovered (°C)"); ax[1].legend(frameon=False, fontsize=7, loc="upper left"); ax[1].set_title("(b) median ± 68% half-width")
-ax[2].set_xlabel("true cooling (°C)"); ax[2].set_ylabel("% of noise draws"); ax[2].set_ylim(0, 100); ax[2].set_title("(c) 95% interval excludes zero"); ax[3].set_xlabel("true cooling (°C)"); ax[3].set_ylabel("68% half-width (°C)"); ax[3].set_ylim(0, 10); ax[3].set_title("(d) uncertainty")
-plt.tight_layout(); plt.savefig("../out/t1_epica_summary.png", dpi=150)
+ax[1].plot([0, 15], [0, 15], "k--", lw=.8); ax[1].set_xlabel("true cooling (°C)"); ax[1].set_ylabel("recovered (°C)"); ax[1].legend(frameon=False, fontsize=7, loc="upper left"); ax[1].set_title("median ± 68% half-width")
+ax[2].set_xlabel("true cooling (°C)"); ax[2].set_ylabel("% of noise draws"); ax[2].set_ylim(0, 100); ax[2].set_title("95% interval excludes zero"); ax[3].set_xlabel("true cooling (°C)"); ax[3].set_ylabel("68% half-width (°C)"); ax[3].set_ylim(0, 10); ax[3].set_title("uncertainty")
+style.panel_labels(np.ravel(ax)); plt.tight_layout(); plt.savefig("../out/t1_epica_summary.png", dpi=150)

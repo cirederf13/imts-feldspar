@@ -45,9 +45,9 @@ for dT, x0 in ((3.0, 0), (10.0, 3)):
     for j, nm in enumerate(names):
         q = res[(dT, kn, nm)]; ax[0].errorbar(x0 + j, q["m1"], yerr=q["s1"], fmt="o", color=cols[j], capsize=3, label=nm if dT == 3.0 else None)
     ax[0].hlines(dT, x0 - 0.4, x0 + 1.4, color="k", ls="--", lw=.8)
-ax[0].set_xticks([0.5, 3.5]); ax[0].set_xticklabels(["true 3 °C", "true 10 °C"]); ax[0].set_ylabel("recovered cooling (°C)"); ax[0].axhline(0, color="0.7", lw=.6); ax[0].legend(frameon=False, fontsize=8); ax[0].set_title("(a) median ± 68% half-width")
+ax[0].set_xticks([0.5, 3.5]); ax[0].set_xticklabels(["true 3 °C", "true 10 °C"]); ax[0].set_ylabel("recovered cooling (°C)"); ax[0].axhline(0, color="0.7", lw=.6); ax[0].legend(frameon=False, fontsize=8); ax[0].set_title("median ± 68% half-width")
 for j, nm in enumerate(names): ax[1].bar(np.arange(2) + 0.2 * (2 * j - 1) + 0.0, [100 * res[(d, kn, nm)]["ex"] for d in (3.0, 10.0)], width=0.38, color=cols[j])
-ax[1].set_xticks([0, 1]); ax[1].set_xticklabels(["3 °C", "10 °C"]); ax[1].set_ylim(0, 100); ax[1].set_ylabel("% of noise draws"); ax[1].set_title("(b) 95% interval excludes zero")
+ax[1].set_xticks([0, 1]); ax[1].set_xticklabels(["3 °C", "10 °C"]); ax[1].set_ylim(0, 100); ax[1].set_ylabel("% of noise draws"); ax[1].set_title("95% interval excludes zero")
 for j, nm in enumerate(names): ax[2].bar(np.arange(2) + 0.2 * (2 * j - 1), [res[(d, kn, nm)]["s1"] for d in (3.0, 10.0)], width=0.38, color=cols[j])
-ax[2].set_xticks([0, 1]); ax[2].set_xticklabels(["3 °C", "10 °C"]); ax[2].set_ylabel("68% half-width of cooling (°C)"); ax[2].set_title("(c) uncertainty (68% half-width)")
-plt.tight_layout(); plt.savefig("../out/t2_transect_summary.png", dpi=150)
+ax[2].set_xticks([0, 1]); ax[2].set_xticklabels(["3 °C", "10 °C"]); ax[2].set_ylabel("68% half-width of cooling (°C)"); ax[2].set_title("uncertainty (68% half-width)")
+style.panel_labels(np.ravel(ax)); plt.tight_layout(); plt.savefig("../out/t2_transect_summary.png", dpi=150)
