@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+log_*.txt
+*.marker
+*.bak*
+nohup.out
+paper_figs/out/*.png

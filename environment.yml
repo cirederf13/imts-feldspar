@@ -1,0 +1,15 @@
+name: imts_jax
+channels: [conda-forge]
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - joblib
+  - matplotlib
+  - pip
+  - pip:
+      - jax
+      - optax
+      - flax
+      - diffrax
+# environment.full.yml is the exact export of the environment used for the paper

@@ -1,0 +1,20 @@
+{
+  "description": "Empirical noise model for ANA-05 VHR feldspar TL counts, fit as variance = a + b*mean from within-curve (Savitzky-Golay) residuals, pooled across all 5 heating rates x 13 preheats x 3 discs.",
+  "recommended": {
+    "a": 65.61944121347759,
+    "b": 0.9624637086583208,
+    "power_law_p": 0.9403584569302109
+  },
+  "within_curve_fit": {
+    "a": 65.61944121347759,
+    "b": 0.9624637086583208,
+    "power_c": 1.670045970722201,
+    "power_p": 0.9403584569302109
+  },
+  "cross_disc_fit": {
+    "a": -2197433.3595655956,
+    "b": 1359.0456051329793,
+    "power_c": 0.02946139446572815,
+    "power_p": 2.0304712698979674
+  }
+}
