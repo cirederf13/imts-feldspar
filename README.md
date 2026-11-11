@@ -2,6 +2,8 @@
 
 Code and derived inputs for the paper on the interactive multi-trap system (IMTS) for TL paleothermometry of Na-feldspar sample ANA-05 (Climate of the Past, in preparation). The IMTS (24 traps, charge neutral, single retrapping and recombination coefficients with B/A = 2) is compared with a general-order kinetic model (GOK) and with independent first-order traps (A = 0).
 
+Archived at Zenodo, DOI 10.5281/zenodo.21445668.
+
 Status: unpublished work, private repository. Code under the MIT licence (see `LICENSE`); the data files are provided for reproducing the paper.
 
 ## Layout
@@ -39,6 +41,10 @@ python paper_figs/make_maad_window_growth.py
 cd paper_figs/tests_fwd_gpu && python example_sens_med.py && python epica_sens_med.py && python elev_post_med.py && python osc_post.py
 ```
 Outputs go to `paper_figs/out/` (not tracked).
+
+## Data
+
+The paper illustrates only a subset of the measurements. The fits use the TL ramps of the three cups at preheats of 60 to 300 degC (162 curves); the repository holds all 234 curves (3 cups x 13 preheats from 60 to 420 degC x 6 heating rates from 0.1 to 5 degC/s) as `tl_data_ana05cups_*.txt`, and `data_full/` adds the same curves rescaled by the test-dose signal (`vhr_tx_corrected/`, factors in `tx_factors.json`) and the scripts that build the curves from the raw BIN files (`processing/`, not re-run from this repository). Raw instrument files are not in the repository.
 
 ## Scope
 
