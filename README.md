@@ -40,6 +40,10 @@ cd paper_figs/tests_fwd_gpu && python example_sens_med.py && python epica_sens_m
 ```
 Outputs go to `paper_figs/out/` (not tracked).
 
+## Scope
+
+The repository contains only the code and data that the paper uses. Earlier experiments (other trap numbers, alternative parametrisations, surrogate models, other data sets) are not included. The reference parameter files `start_joint1_final.json` and `gcd_params_irr*_joint_maad_ERR_nN_vs100.json` are the starting points of the fits and come from earlier fits that are not part of this repository.
+
 ## Known gaps
 
 - `paper_figs/tests_fwd_gpu/` contains the scripts that generate the grids of the synthetic temperature-history tests (`example_*.py`, `test*.py`, `osc_*.py`, JAX). They run from `paper_figs/tests_fwd_gpu` but call the forward model, which reads its data with paths relative to the repository root, so they have not been re-run from this repository yet; the plotting scripts (`*_med.py`, `osc_post.py`) have been re-run and reproduce the paper figures. Proxy records in `proxy/` are public (NGRIP d18O, GICC05 timescale, EPICA Dome C EDC3 temperature); please add the full citations before release.

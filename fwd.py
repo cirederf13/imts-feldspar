@@ -49,7 +49,7 @@ def maad_resid(m, nj):
     return np.concatenate(out)
 # ---- ITL
 import pickle
-ITL_WINS = [(lo, lo + 10) for lo in range(200, 300 if os.environ.get('KTB') else 350, 10)]; ITL_T = [180, 210, 240, 270, 300, 330, 360]; ITL_TH = [0, 10, 30, 100, 300, 1000]
+ITL_WINS = [(lo, lo + 10) for lo in range(200, 350, 10)]; ITL_T = [180, 210, 240, 270, 300, 330, 360]; ITL_TH = [0, 10, 30, 100, 300, 1000]
 _d = pickle.load(open("itl_data.pkl", "rb")); _W = lambda o, lo, hi: (o['res'] - o['bg'])[lo:hi].sum()
 ITL_REF = np.array([np.median([_W(o, lo, hi) for o in _d if o['T'] == 150 and o['th'] == 0]) for lo, hi in ITL_WINS]); _D = {}
 for o in _d:

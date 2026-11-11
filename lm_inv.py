@@ -6,7 +6,6 @@ import sys, os, json, time, numpy as np
 f_ref, f_start, tag = sys.argv[1], sys.argv[2], sys.argv[3]; nj = int(sys.argv[4]) if len(sys.argv) > 4 else 11; MAXIT = int(sys.argv[5]) if len(sys.argv) > 5 else 12; USE_DATUM = (sys.argv[6] != "0") if len(sys.argv) > 6 else True
 os.environ["IMTS_PARAMS"] = os.path.abspath(f_ref); import fwd, pgrid
 fwd.init_main(); ref = pgrid.Ref(os.path.abspath(f_ref)); IDX = fwd.IDX; NX = fwd.NX; NXB = NX - (2 if fwd.QUENCH else 0)
-if os.environ.get('KTB'): import ktb; ktb.apply(os.environ['KTB'])                      # KTB20-16 data terms (ktb.py)
 if os.environ.get('SYNTH_DATA'): import synth; synth.apply(os.environ['SYNTH_DATA'])          # synthetic-data benchmark (synth.py)
 SIGDEV = float(os.environ.get("SIGDEV", 2.0)); SIGSM = float(os.environ.get("SIGSM", 2.0)); SIGE = float(os.environ.get("SIGE", 0.10)); NU = 4.0
 KAPPA = dict(tl=float(os.environ.get('NEFF_TL', 8.0)) / 268.0, itl=float(os.environ.get('NEFF_ITL', 3.0)) / 10.8, prof=float(os.environ.get('NEFF_PROF', 3.0)) / 15.0, maad=1.0, lab=1.0)      # effective independent points per curve (env NEFF_TL, NEFF_ITL)
@@ -19,8 +18,7 @@ def prior_resid(x):
     r.append([(x[IDX["logD0"]] - 3.5) / 1.0, (x[IDX["logM0"]] - 9.5) / 1.5])
     if NXB >= 29: bb = x[IDX["bexp"]]; r.append([max(0.0, 1.0 - bb) / 0.05, max(0.0, bb - 2.0) / 0.05, (bb - 1.5) / 1.0])
     if NXB == 30: aa = x[IDX["aexp"]]; r.append([max(0.0, 0.5 - aa) / 0.05, max(0.0, aa - 2.5) / 0.05, (aa - 1.0) / 1.0]); r.append((x[IDX["logDnat"]] - 1.0) / 2.0); r.append([(x[IDX["a"]] + 5.5) / 0.3, x[IDX["b"]] / 0.3])
-    if os.environ.get('KTB'): r.append((x[IDX['logDnat']] - 2.5) / 1.5); r.append(np.maximum(0, 0.3 - x[IDX['logDnat']]) / 0.1); r.append(np.maximum(0, x[IDX['logDnat']] - 4.2) / 0.1)      # natural-dose nodes: weak prior (300 Gy, 1.5 dex) and soft bounds [0.3, 4.2] (the code clips beyond)
-    if os.environ.get('KTB') or 'lab' in os.environ.get('DROP', '').split(','): r.append([(x[IDX['a']] + 5.5) / 0.3, x[IDX['b']] / 0.3])      # fading law is not fitted for KTB (rho' per window is given): keep a, b at their prior
+    if 'lab' in os.environ.get('DROP', '').split(','): r.append([(x[IDX['a']] + 5.5) / 0.3, x[IDX['b']] / 0.3])      # fading law is not fitted for KTB (rho' per window is given): keep a, b at their prior
     if fwd.QUENCH: r.append([(x[IDX['qlogC']] - 5.5) / 2.0, (x[IDX['qW']] - 0.5) / 0.2, max(0.0, 0.05 - x[IDX['qW']]) / 0.01])      # weak prior on the quenching parameters
     E, s, logN = ref.build(x[IDX["dE"]], x[IDX["eta"]], x[IDX["dN"]]); ls = np.log10(s); r.append(np.maximum(0, ls - 14.0) / 0.3); r.append(np.maximum(0, 10.0 - ls) / 0.3)
     return np.concatenate([np.atleast_1d(np.asarray(v, float)) for v in r])
