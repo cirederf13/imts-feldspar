@@ -2,7 +2,7 @@
 
 Code and derived inputs for the paper on the interactive multi-trap system (IMTS) for TL paleothermometry of Na-feldspar sample ANA-05 (Climate of the Past, in preparation). The IMTS (24 traps, charge neutral, single retrapping and recombination coefficients with B/A = 2) is compared with a general-order kinetic model (GOK) and with independent first-order traps (A = 0).
 
-Status: unpublished work, private repository.
+Status: unpublished work, private repository. Code under the MIT licence (see `LICENSE`); the data files are provided for reproducing the paper.
 
 ## Layout
 
@@ -36,6 +36,7 @@ cd paper_figs
 PYTHONPATH=.. python make_compare3_slow.py
 PYTHONPATH=.. python make_forward3_slow.py
 python make_synthetic_tests.py
+python make_maad_window_growth.py
 cd tests_fwd_gpu && python example_sens_med.py && python epica_sens_med.py && python elev_post_med.py && python osc_post.py
 ```
 Outputs go to `paper_figs/out/` (not tracked).
@@ -44,7 +45,5 @@ Outputs go to `paper_figs/out/` (not tracked).
 
 - `paper_figs/tests_fwd_gpu/` contains the scripts that generate the grids of the synthetic temperature-history tests (`example_*.py`, `test*.py`, `osc_*.py`, JAX). They run from `paper_figs/tests_fwd_gpu` but call the forward model, which reads its data with paths relative to the repository root, so they have not been re-run from this repository yet; the plotting scripts (`*_med.py`, `osc_post.py`) have been re-run and reproduce the paper figures. Proxy records in `proxy/` are public (NGRIP d18O, GICC05 timescale, EPICA Dome C EDC3 temperature); please add the full citations before release.
 
-- No script for the figure `maad_window_growth` (growth with dose in the three windows, one saturating exponential per series); it has to be rebuilt from `maad_windows.json`.
 - The synthetic 10 degC test is run (`run/run_synth10.sh`) but not yet in `make_synthetic_tests.py` / `synprof.py`.
 - Raw instrument files (BIN) are not included.
-- No licence has been chosen.
